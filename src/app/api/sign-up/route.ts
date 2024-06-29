@@ -1,4 +1,4 @@
-import sendverificationEmail from "@/components/emailVerification";
+// import sendverificationEmail from "@/components/emailVerification";
 import dbConnect from "@/lib/db.connect";
 import UserModel from "@/model/user";
 import bcrypt from "bcryptjs";
