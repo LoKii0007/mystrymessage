@@ -25,7 +25,7 @@ export async function GET(req: Request) {
 
   //aggregation pipeline
   //todo : aggregation pipeline samjhna hai
-  const userId = new mongoose.Types.ObjectId(user._id)
+  const userId = new mongoose.Types.ObjectId(user._id);
 
   try {
     const user = await UserModel.aggregate([

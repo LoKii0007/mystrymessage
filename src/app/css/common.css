@@ -1,0 +1,27 @@
+.link{
+    text-decoration: underline;
+}
+
+.copy-btn{
+    background-color: grey;
+    color: white;
+    padding: 8px 16px;
+}
+
+.delete-btn{
+    background-color: #D11A2A;
+    font-size: 20px;
+    padding: 4px 16px;
+}
+
+.message{
+    font-weight: 600;
+}
+
+.card{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px;
+}
+
+.date{
+    font-size: 12px;
+}

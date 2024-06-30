@@ -88,7 +88,7 @@ function Signup() {
 
   return (
     <>
-      <div className="sign-up h-[100vh] w-[100vw] flex justify-center items-center ">
+      <div className="sign-up h-[100vh] w-[100vw] flex flex-col justify-center items-center ">
         <form  onSubmit={(e)=>handleSubmit(e)} className="" >
           <div className='username py-2 flex flex-col' >
              <label htmlFor="username">username</label>
@@ -112,10 +112,10 @@ function Signup() {
           {isSubmitting ? "Submitting..." : "Sign Up"}
         </button>
           </div>
-          <div  className="text-center pt-5">
+        </form>
+        <div  className="text-center pt-5">
           <button onClick={()=>router.push('/sign-in')} >signin</button>
           </div>
-        </form>
       </div>
     </>
   )
