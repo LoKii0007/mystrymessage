@@ -1,28 +1,39 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { getToken } from "next-auth/jwt"
-export {default} from 'next-auth/middleware'
- 
-export async function middleware(request: NextRequest) {
-  const token = await getToken({req:request})
-  // konse current url pe hai uske liye
-  const url = request.nextUrl
+import { NextRequest, NextResponse } from 'next/server';
+import { getToken } from "next-auth/jwt";
+export { default } from 'next-auth/middleware';
 
-  if(token && (
-      url.pathname.startsWith('/sign-in') || 
-      url.pathname.startsWith('/sign-up') || 
-      url.pathname.startsWith('/verify') || 
-      url.pathname.startsWith('/') )
-    ){
-    return NextResponse.redirect(new URL('/dashboard', request.url))
+export async function middleware(request: NextRequest) {
+  const token = await getToken({ req: request });
+  const url = request.nextUrl;
+  const path = url.pathname;
+
+  console.log('Path:', path);
+  // console.log('Token:', token);
+
+  // If user is authenticated
+  if (token) {
+    if (
+      path === '/sign-in' ||
+      path === '/sign-up' ||
+      path === '/verify' ||
+      path === '/'
+    ) {
+      console.log('Redirecting to /dashboard');
+      return NextResponse.redirect(new URL('/dashboard', request.url));
+    }
+  } else {
+    // If user is not authenticated and trying to access the dashboard
+    if (path.startsWith('/dashboard')) {
+      console.log('Redirecting to /sign-in');
+      return NextResponse.redirect(new URL('/sign-in', request.url));
+    }
   }
-  if(!token && url.pathname.startsWith('/dashboard') ){
-    return NextResponse.redirect(new URL('/sign-in', request.url))
-  }
-  // return NextResponse.next()
-  return 
+
+  // If none of the conditions match, proceed with the request
+  return NextResponse.next();
 }
- 
-// ye file define karti hai ki middleware kon kon se path pe run kare 
+
+// Define the paths where the middleware should run
 export const config = {
   matcher: [
     '/sign-in',
@@ -31,4 +42,4 @@ export const config = {
     '/dashboard/:path*',
     '/verify/:path*'
   ],
-}
+};

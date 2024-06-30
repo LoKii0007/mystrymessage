@@ -1,10 +1,11 @@
 import dbConnect from "@/lib/db.connect";
 import UserModel, { Message } from "@/model/user";
 
-export async function GET(req:Request) {
+export async function POST(req:Request) {
     await dbConnect()
 
     const {username , content} = await req.json()
+    console.log(username , content)
 
     try {
         const user = await UserModel.findOne({username})
@@ -49,13 +50,14 @@ export async function GET(req:Request) {
             }
         );
     } catch (error) {
+      console.log('error calling send message api', error)
         return Response.json(
             {
               success: false,
-              message: "error updating isacceptingmessage status",
+              message: "error sednding messages",
             },
             {
-              status: 400,
+              status: 500,
             }
         );
     }

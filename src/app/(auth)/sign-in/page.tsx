@@ -22,7 +22,7 @@ export default function Signin() {
         }else{
             toast.error(`some error occured please try again`)
         }
-        console.log('signin res :' , res)
+        // console.log('signin res :' , res)
     }
     return (
         <>
@@ -44,6 +44,8 @@ export default function Signin() {
                 <div className="text-center m-10">
                     <button className=" bg-blue-400 py-2 px-5 rounded-full" onClick={handleSubmit }>Sign in</button>
                 </div>
+
+                <button onClick={()=>router.push('/sign-up')} >signup</button>
             </div>
         </>
     )

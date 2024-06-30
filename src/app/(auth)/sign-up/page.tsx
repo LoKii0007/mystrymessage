@@ -112,6 +112,9 @@ function Signup() {
           {isSubmitting ? "Submitting..." : "Sign Up"}
         </button>
           </div>
+          <div  className="text-center pt-5">
+          <button onClick={()=>router.push('/sign-in')} >signin</button>
+          </div>
         </form>
       </div>
     </>

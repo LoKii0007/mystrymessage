@@ -44,7 +44,7 @@ export async function POST(req : Request){
         }
         return Response.json(
             {
-              success: false,
+              success: true,
               message: "isacceptingmessage status updated successfully",
             },
             {
@@ -52,6 +52,7 @@ export async function POST(req : Request){
             }
           );
     } catch (error) {
+      console.log('error calling accept-messages post api', error)
         return Response.json(
             {
               success: false,
@@ -101,7 +102,7 @@ export async function GET(req:Request) {
         }
         return Response.json(
             {
-              success: false,
+              success: true,
               message: "status fetched successfully",
               isAcceptingMessages : foundUser.isAcceptingMessage
             },
@@ -110,6 +111,7 @@ export async function GET(req:Request) {
             }
           );
     } catch (error) {
+      console.log('error calling accept-messages get api', error)
         return Response.json(
             {
               success: false,
