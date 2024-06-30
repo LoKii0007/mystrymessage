@@ -27,7 +27,7 @@ export default function Verify() {
                 console.log(res.data.message)
             }
         } catch (error) {
-            console.log('error in verify code api', error)
+            console.log(error)
         } finally {
             setIsVerifying(false)
         }

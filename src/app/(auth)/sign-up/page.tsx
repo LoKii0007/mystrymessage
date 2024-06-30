@@ -86,14 +86,17 @@ function Signup() {
     }
   }
 
+  useEffect(()=>{
+  }, [isCheckinUsername])
+
   return (
     <>
       <div className="sign-up h-[100vh] w-[100vw] flex flex-col justify-center items-center ">
         <form  onSubmit={(e)=>handleSubmit(e)} className="" >
           <div className='username py-2 flex flex-col' >
              <label htmlFor="username">username</label>
-             <input onChange={(e)=>handleData(e)} value={data.username} className={`${usernameMessage.success ? 'name-yes' : 'name-not'} border-2 `} name='username' type="text" />
-             <p >{usernameMessage.message}</p>
+             <input onChange={(e)=>handleData(e)} value={data.username} className="" name='username' type="text" />
+             {isCheckinUsername ? <p className="text-green-400" >checking username...</p> : <p className="">{usernameMessage.message}</p> }
           </div>
           <div className='email py-2 flex flex-col' >
              <label htmlFor="email">someone@gmail.com</label>
