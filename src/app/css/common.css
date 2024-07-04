@@ -25,3 +25,15 @@
 .date{
     font-size: 12px;
 }
+
+.heading{
+    font-weight: 600;
+}
+
+.text{
+    border: none;
+}
+
+input:focus{
+    outline: none;
+}

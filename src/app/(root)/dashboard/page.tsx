@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { ApiResponse } from '@/types/apiResponse';
 import toast from 'react-hot-toast';
 import '@/app/css/common.css'
+import { useRouter } from 'next/navigation';
 
 interface Message {
   content: string;
@@ -16,6 +17,7 @@ interface Message {
 
 function Page() {
   const [messages, setMessages] = useState<Message[]>([])
+  const router = useRouter()
   const [loading, setLoading] = useState<true | false>(false)
   const [acceptingMessages, setAcceptingMessages] = useState<true | false>(false)
 
@@ -64,6 +66,7 @@ function Page() {
   }
 
   async function handleDelete(messageId: string){
+    // setMessages(messages.filter(msg => msg._id !== messageId))
     const res = await axios.delete(`/api/delete-message/${messageId}`)
     console.log(res)
     if (res.data.success) {
@@ -98,13 +101,16 @@ function Page() {
             <input className="accept-switch" onClick={(e)=>handleIsAccepting(e)} checked={acceptingMessages} type="checkbox" role="switch" />
             <label className="px-3" htmlFor="accept-switch">Accepting messages : {acceptingMessages ? 'on' : 'off'}</label>
             </div>
+            <button onClick={()=>router.push('/send-message')} className="send-btn px-10 py-3 bg-black text-white rounded-2xl ">Send message</button>
             <div className="accept-right">
             <button onClick={()=>handleRefresh()} className=' rounded-md copy-btn'>Refresh</button>
             </div>
           </div>
         </div>
         <div className="dashbord-body w-full">
-          <div className="heading text-2xl font-medium">Messages</div>
+          <div className="heading text-2xl font-medium flex">
+            <div className='mr-5' >Messages</div>
+            </div>
         <div className="dashoboard-bottom w-full flex flex-row flex-wrap justify-between">
           {messages.length > 0
             ?

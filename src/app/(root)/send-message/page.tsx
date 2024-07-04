@@ -4,6 +4,7 @@ import { ApiResponse } from '@/types/apiResponse'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import '@/app/css/common.css'
 
 function Page() {
     const [message, setMessage] = useState<string>('')
@@ -47,22 +48,23 @@ function Page() {
 
     return (
         <>
-            <div className="send">
-                <div className="heading">send anonymous mesages</div>
-                <div>
-                    enter url
+            <div className="send w-full p-12 h-full flex flex-col items-center">
+                <div className=' w-[70%]'>
+                <div className="heading text-center pb-12 text-4xl">Send Anonymous Messages</div>
+                <div className='w-[70%]text-xl ' >
+                    Enter unique link
                     <input type='text'
-                        className='border-2'
+                        className='border-b-2 m-5 px-2 '
                         onChange={(e) => {
                             e.preventDefault()
                             setUrl(e.target.value)
                         }}
                         value={url} />
                 </div>
-                <div>
-                    <div>enter message</div>
+                <div className='w-[70%]text-xl'>
+                    Enter your message
                     <input type="text"
-                        className='border-2'
+                        className='border-b-2 m-5 px-2 '
                         onChange={(e) => {
                             e.preventDefault()
                             setMessage(e.target.value)
@@ -71,9 +73,14 @@ function Page() {
                         minLength={5}
                     />
                 </div>
-                <button onClick={handleSendMessage} className='px-10 py-3 bg-black text-white rounded-2xl ' >send Message</button>
-                <div className="suggest">
-                    <button onClick={handleSuggestMessages} >suggest</button>
+                <div className='my-5 send-bottom flex ' >
+                    <div className='w-[50%]'>
+                    <button onClick={handleSendMessage} className='px-10 py-3 bg-black text-white rounded-2xl ' >send Message</button>
+                    </div>
+                    <div className='w-[50%]'>
+                    <button className='px-10 py-3 bg-black text-white rounded-2xl ' onClick={handleSuggestMessages} >suggest Messages</button>
+                    </div>
+                </div>
                 </div>
             </div>
         </>
