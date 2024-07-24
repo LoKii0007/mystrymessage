@@ -49,12 +49,12 @@ function Page() {
     return (
         <>
             <div data-theme="cupcake" className="send w-full p-12 h-[90vh] flex flex-col items-center">
-                <div className=' w-[70%]'>
+                <div className=' w-[90%] bg-neutral-200 p-12 rounded-xl'>
                 <div className="heading text-center pb-12 text-4xl">Send Anonymous Messages</div>
                 <div className='w-[70%]text-xl flex items-center' >
                     <div className='w-[10vw]' >Enter unique link</div>
                     <input data-theme="cupcake" type='text'
-                        className='border-b-2 m-5 px-2 border-black'
+                        className='border-b-2 m-5 px-2 bg-neutral-200 border-black'
                         onChange={(e) => {
                             e.preventDefault()
                             setUrl(e.target.value)
@@ -64,7 +64,7 @@ function Page() {
                 <div className='w-[70%]text-xl flex items-center'>
                     <div className='w-[10vw]' >Enter your message</div>
                     <input data-theme="cupcake" type="text"
-                        className='border-b-2 m-5 px-2 border-black'
+                        className='border-b-2 m-5 px-2 bg-neutral-200 border-black'
                         onChange={(e) => {
                             e.preventDefault()
                             setMessage(e.target.value)
