@@ -34,7 +34,7 @@ export default function Signin() {
     return (
         <>
             <div className=" h-[100vh] w-[100vw] flex flex-col justify-center items-center  bg-neutral-300">
-                <div data-theme='light' className="flex w-[30vw] flex-col justify-center items-center p-12 rounded-md" >
+                <div data-theme='light' className="flex w-[30vw] flex-col shadow-xl bg-neutral-200 justify-center items-center p-12 rounded-md" >
                     <div className="text-3xl py-5">True Feedback</div>
                 <div className='email p-2 flex' >
                     <label className="p-3 w-[120px]"  htmlFor="email">Identifier</label>
@@ -51,7 +51,7 @@ export default function Signin() {
                         }} placeholder="123456" className='border-2 px-2 rounded-full' name='password' type="password" />
                 </div>
                 <div className="text-center m-10">
-                    <button disabled={loading} className=" bg-blue-400 py-2 px-12 rounded-full" onClick={handleSubmit }>Sign in</button>
+                    <button disabled={loading} className=" bg-neutral-300 py-2 px-12 rounded-full" onClick={handleSubmit }>Sign in</button>
                 </div>
 
                 <button className="text-sm" onClick={()=>router.push('/sign-up')} >signup</button>

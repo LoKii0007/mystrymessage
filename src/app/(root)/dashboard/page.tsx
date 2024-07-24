@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 interface Message {
   content: string;
   createdAt: string;
-  _id : string
+  _id: string
 }
 
 function Page() {
@@ -24,9 +24,9 @@ function Page() {
   const { data: session } = useSession()
   const uniqueUrl = `https://mystrymessage.vercel.app/${session?.user.username}`
 
-  async function getMessages(){
+  async function getMessages() {
     const res = await axios.get('/api/get-messages')
-    if(res.data.success){
+    if (res.data.success) {
       setMessages(res.data.messages)
       console.log(res.data)
     }
@@ -50,7 +50,7 @@ function Page() {
     if (res) {
       console.log(res.data)
       setLoading(false)
-      if(res.data.success) setAcceptingMessages(res.data.isAcceptingMessages)
+      if (res.data.success) setAcceptingMessages(res.data.isAcceptingMessages)
     }
   }
 
@@ -62,7 +62,7 @@ function Page() {
     }
   }
 
-  async function handleDelete(messageId: string){
+  async function handleDelete(messageId: string) {
     // setMessages(messages.filter(msg => msg._id !== messageId))
     const res = await axios.delete(`/api/delete-message/${messageId}`)
     console.log(res)
@@ -79,51 +79,51 @@ function Page() {
     getAcceptingMessage()
   }, [])
 
-  useEffect(()=>{
-   console.log(acceptingMessages)
+  useEffect(() => {
+    console.log(acceptingMessages)
   }, [acceptingMessages])
 
-  function handleRefresh(){
+  function handleRefresh() {
     getMessages()
   }
 
   return (
     <div data-theme="cupcake" className='main w-[100vw] flex justify-center '>
-      <div className="dashboard  w-[70vw] h-[90vh] flex flex-col justify-start items-start">
-        <div className="dashoboard-top w-full my-5">
+      <div className="dashboard  w-[90vw] h-[90vh] flex flex-col justify-start items-start">
+        <div className="dashoboard-top shadow-lg w-full bg-neutral-200 p-12 rounded-xl my-5">
           {/* <div className='text-5xl mb-4'>User dashboard</div> */}
-          <div data-theme="cupcake" className='text-2xl my-4'>Copy your unique link</div>
-          <div data-theme="cupcake" className='flex justify-between items-center pl-2 rounded-md bg-neutral-200 w-[100%]'>
+          <div className='text-2xl my-4'>Copy your unique link</div>
+          <div className='flex justify-between items-center pl-2 rounded-md bg-neutral-300 w-[100%]'>
             <div className='link' >{uniqueUrl}</div>
             <button onClick={copyToClipboard} className='copy-btn rounded-md'>copy</button>
           </div>
           <div className="accept flex my-4 w-[100%] justify-between items-center">
-            <div className="accept-left">
-            <input type="checkbox" className="toggle" disabled={loading} onClick={()=>handleAcceptingMessage(!acceptingMessages)} checked={acceptingMessages} />
-            {/* <input className="accept-switch" onClick={(e)=>handleIsAccepting(e)} checked={acceptingMessages} type="checkbox" role="switch" /> */}
-            <label className="px-3" htmlFor="accept-switch">Accepting messages : {acceptingMessages ? 'on' : 'off'}</label>
+            <div className="accept-left flex items-center">
+              <input type="checkbox" className="toggle" disabled={loading} onClick={() => handleAcceptingMessage(!acceptingMessages)} checked={acceptingMessages} />
+              {/* <input className="accept-switch" onClick={(e)=>handleIsAccepting(e)} checked={acceptingMessages} type="checkbox" role="switch" /> */}
+              <label className="px-3" htmlFor="accept-switch">Accepting messages : {acceptingMessages ? 'on' : 'off'}</label>
             </div>
             {/* <button onClick={()=>router.push('/send-message')} className="send-btn px-10 py-3 bg-black text-white rounded-2xl ">Send message</button> */}
             <div className="accept-right">
-            <button onClick={()=>handleRefresh()} className=' rounded-md copy-btn'>Refresh</button>
+              <button onClick={() => handleRefresh()} className=' rounded-md copy-btn'>Refresh</button>
             </div>
           </div>
         </div>
-        <div className="dashbord-body w-full">
+        <div className="dashbord-body shadow-lg w-full bg-neutral-200 p-12 rounded-xl">
           <div className="heading text-2xl font-medium flex">
             <div className='mr-5' >Messages</div>
-            </div>
-        <div className="dashoboard-bottom w-full flex flex-row flex-wrap justify-between">
-          {messages.length > 0
-            ?
-            messages.map((msg, index) => (
-              <Card key={index} message={msg} onDelete={()=>handleDelete(msg._id)} />
-            )
-            )
-            :
-            <div className='text-center w-full p-12' >you dont have any messages yet </div>
-          }
-        </div>
+          </div>
+          <div className="dashoboard-bottom w-full flex flex-row flex-wrap justify-between">
+            {messages.length > 0
+              ?
+              messages.map((msg, index) => (
+                <Card key={index} message={msg} onDelete={() => handleDelete(msg._id)} />
+              )
+              )
+              :
+              <div className='text-center w-full p-12' >you dont have any messages yet </div>
+            }
+          </div>
         </div>
       </div>
     </div>

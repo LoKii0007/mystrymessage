@@ -10,7 +10,7 @@ export default function Navbar() {
     const pathname = usePathname()
     console.log(pathname)
     return (
-        <div className='sticky p-5 h-[10vh] bg-gray-600 text-white flex justify-center items-center '>
+        <div className='sticky p-5 h-[10vh] bg-gray-500 text-white flex justify-center items-center '>
             <div className="navbar flex items-center justify-between">
                 <div className="nav-left px-12">
                     <div className='cursor-pointer' onClick={()=>router.push('/dashboard')} >True feedback</div>

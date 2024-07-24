@@ -92,7 +92,7 @@ function Signup() {
   return (
     <>
       <div className="sign-up h-[100vh] w-[100vw] flex flex-col justify-center items-center bg-neutral-300 ">
-        <div data-theme='light' className="flex w-[30vw] flex-col justify-center items-center p-12 rounded-md">
+        <div data-theme='light' className="flex w-[30vw] flex-col shadow-xl bg-neutral-200 justify-center items-center p-12 rounded-md">
         <div className="text-3xl py-5">True Feedback</div>
         <form  onSubmit={(e)=>handleSubmit(e)} className="" >
           <div className='username py-2 flex' >
