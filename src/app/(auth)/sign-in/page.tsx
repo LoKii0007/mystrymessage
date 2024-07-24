@@ -33,26 +33,29 @@ export default function Signin() {
 
     return (
         <>
-            <div className="sign-up h-[100vh] w-[100vw] flex flex-col justify-center items-center ">
-                <div className='email py-2 flex flex-col' >
-                    <label htmlFor="email">Identifier</label>
+            <div className=" h-[100vh] w-[100vw] flex flex-col justify-center items-center  bg-neutral-300">
+                <div data-theme='light' className="flex w-[30vw] flex-col justify-center items-center p-12 rounded-md" >
+                    <div className="text-3xl py-5">True Feedback</div>
+                <div className='email p-2 flex' >
+                    <label className="p-3 w-[120px]"  htmlFor="email">Identifier</label>
                     <input onChange={(e) => {
                         e.preventDefault()
                         setText(e.target.value)
-                        }} placeholder="email or username" className='border-2' name='email' type="email" />
+                        }} placeholder="email or username" className='border-2 px-2 rounded-full' name='email' type="email" />
                 </div>
-                <div className='password py-2 flex flex-col' >
-                    <label htmlFor="password">password</label>
+                <div className='password p-2 flex' >
+                    <label className="p-3 w-[120px]" htmlFor="password">Password</label>
                     <input onChange={(e) => {
                         e.preventDefault()
                         setPassword(e.target.value)
-                        }} placeholder="123456" className='border-2' name='password' type="password" />
+                        }} placeholder="123456" className='border-2 px-2 rounded-full' name='password' type="password" />
                 </div>
                 <div className="text-center m-10">
-                    <button disabled={loading} className=" bg-blue-400 py-2 px-5 rounded-full" onClick={handleSubmit }>Sign in</button>
+                    <button disabled={loading} className=" bg-blue-400 py-2 px-12 rounded-full" onClick={handleSubmit }>Sign in</button>
                 </div>
 
-                <button onClick={()=>router.push('/sign-up')} >signup</button>
+                <button className="text-sm" onClick={()=>router.push('/sign-up')} >signup</button>
+                </div>
             </div>
         </>
     )

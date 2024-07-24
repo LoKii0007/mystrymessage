@@ -103,7 +103,7 @@ function Page() {
             {/* <input className="accept-switch" onClick={(e)=>handleIsAccepting(e)} checked={acceptingMessages} type="checkbox" role="switch" /> */}
             <label className="px-3" htmlFor="accept-switch">Accepting messages : {acceptingMessages ? 'on' : 'off'}</label>
             </div>
-            <button onClick={()=>router.push('/send-message')} className="send-btn px-10 py-3 bg-black text-white rounded-2xl ">Send message</button>
+            {/* <button onClick={()=>router.push('/send-message')} className="send-btn px-10 py-3 bg-black text-white rounded-2xl ">Send message</button> */}
             <div className="accept-right">
             <button onClick={()=>handleRefresh()} className=' rounded-md copy-btn'>Refresh</button>
             </div>

@@ -91,26 +91,28 @@ function Signup() {
 
   return (
     <>
-      <div className="sign-up h-[100vh] w-[100vw] flex flex-col justify-center items-center ">
+      <div className="sign-up h-[100vh] w-[100vw] flex flex-col justify-center items-center bg-neutral-300 ">
+        <div data-theme='light' className="flex w-[30vw] flex-col justify-center items-center p-12 rounded-md">
+        <div className="text-3xl py-5">True Feedback</div>
         <form  onSubmit={(e)=>handleSubmit(e)} className="" >
-          <div className='username py-2 flex flex-col' >
-             <label htmlFor="username">username</label>
-             <input onChange={(e)=>handleData(e)} value={data.username} className="" name='username' type="text" />
+          <div className='username py-2 flex' >
+             <label className="p-3 w-[120px]" htmlFor="username">username</label>
+             <input onChange={(e)=>handleData(e)} value={data.username} placeholder="someone" className="border-2 px-2 rounded-full" name='username' type="text" />
              {isCheckinUsername ? <p className="text-green-400" >checking username...</p> : <p className="">{usernameMessage.message}</p> }
           </div>
-          <div className='email py-2 flex flex-col' >
-             <label htmlFor="email">someone@gmail.com</label>
-             <input onChange={(e)=>handleData(e)} value={data.email} className='border-2' name='email' type="email" />
+          <div className='email py-2 flex' >
+             <label className="p-3 w-[120px]" htmlFor="email">Email</label>
+             <input onChange={(e)=>handleData(e)} value={data.email} placeholder="someone@gmail.com" className='border-2 px-2 rounded-full' name='email' type="email" />
           </div>
-          <div className='password py-2 flex flex-col' >
-             <label htmlFor="password">password</label>
-             <input onChange={(e)=>handleData(e)} value={data.password} className='border-2' name='password' type="password" />
-          </div>
+          <div className='password py-2 flex' >
+             <label className="p-3 w-[120px]" htmlFor="password">password</label>
+             <input onChange={(e)=>handleData(e)} value={data.password} placeholder="123456" className='border-2 px-2 rounded-full' name='password' type="password" />
+          </div> 
           <div className="text-center">
           <button 
             type="submit"
             disabled={isSubmitting}
-            className=" bg-blue-500 px-5 py-2 rounded-full"
+            className=" bg-blue-500 px-12 mt-5 py-2 rounded-full"
             >
           {isSubmitting ? "Submitting..." : "Sign Up"}
         </button>
@@ -119,6 +121,7 @@ function Signup() {
         <div  className="text-center pt-5">
           <button onClick={()=>router.push('/sign-in')} >signin</button>
           </div>
+        </div>
       </div>
     </>
   )
