@@ -88,12 +88,12 @@ function Page() {
   }
 
   return (
-    <div className='main w-[100vw] flex justify-center'>
-      <div className="dashboard w-[70vw] h-[90vh] flex flex-col justify-start items-start">
+    <div data-theme="cupcake" className='main w-[100vw] flex justify-center '>
+      <div className="dashboard  w-[70vw] h-[90vh] flex flex-col justify-start items-start">
         <div className="dashoboard-top w-full my-5">
           {/* <div className='text-5xl mb-4'>User dashboard</div> */}
-          <div className='text-2xl my-4'>Copy your unique link</div>
-          <div className='flex justify-between items-center pl-2 rounded-md bg-slate-200 w-[100%]'>
+          <div data-theme="cupcake" className='text-2xl my-4'>Copy your unique link</div>
+          <div data-theme="cupcake" className='flex justify-between items-center pl-2 rounded-md bg-neutral-200 w-[100%]'>
             <div className='link' >{uniqueUrl}</div>
             <button onClick={copyToClipboard} className='copy-btn rounded-md'>copy</button>
           </div>
