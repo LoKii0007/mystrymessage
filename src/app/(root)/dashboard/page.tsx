@@ -19,7 +19,7 @@ function Page() {
   const [messages, setMessages] = useState<Message[]>([])
   const router = useRouter()
   const [loading, setLoading] = useState<true | false>(false)
-  const [acceptingMessages, setAcceptingMessages] = useState<true | false>(false)
+  const [acceptingMessages, setAcceptingMessages] = useState<true | false>()
 
   const { data: session } = useSession()
   const uniqueUrl = `https://mystrymessage.vercel.app/${session?.user.username}`
@@ -45,16 +45,13 @@ function Page() {
   }
 
   async function handleAcceptingMessage(msg: boolean | undefined) {
+    setLoading(true)
     const res = await axios.post('/api/accept-messages', { acceptMessages: msg })
     if (res) {
-      console.log(res.data.message)
+      console.log(res.data)
+      setLoading(false)
+      if(res.data.success) setAcceptingMessages(res.data.isAcceptingMessages)
     }
-  }
-
-  function handleIsAccepting(e:any) {
-    getMessages()
-    setAcceptingMessages(!acceptingMessages)
-    handleAcceptingMessage(acceptingMessages)
   }
 
   async function getAcceptingMessage() {
@@ -82,6 +79,10 @@ function Page() {
     getAcceptingMessage()
   }, [])
 
+  useEffect(()=>{
+   console.log(acceptingMessages)
+  }, [acceptingMessages])
+
   function handleRefresh(){
     getMessages()
   }
@@ -98,7 +99,8 @@ function Page() {
           </div>
           <div className="accept flex my-4 w-[100%] justify-between items-center">
             <div className="accept-left">
-            <input className="accept-switch" onClick={(e)=>handleIsAccepting(e)} checked={acceptingMessages} type="checkbox" role="switch" />
+            <input type="checkbox" className="toggle" disabled={loading} onClick={()=>handleAcceptingMessage(!acceptingMessages)} checked={acceptingMessages} />
+            {/* <input className="accept-switch" onClick={(e)=>handleIsAccepting(e)} checked={acceptingMessages} type="checkbox" role="switch" /> */}
             <label className="px-3" htmlFor="accept-switch">Accepting messages : {acceptingMessages ? 'on' : 'off'}</label>
             </div>
             <button onClick={()=>router.push('/send-message')} className="send-btn px-10 py-3 bg-black text-white rounded-2xl ">Send message</button>
