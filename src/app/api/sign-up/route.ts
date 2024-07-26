@@ -35,7 +35,6 @@ export async function POST(req: Request) {
       );
     }
 
-
     //*  existing user and not verified
     const existingUserByEmail = await UserModel.findOne({ email });
     const verificationCode = Math.floor(
@@ -86,33 +85,33 @@ export async function POST(req: Request) {
       from: process.env.SENDER_EMAIL,
       to: email,
       subject: "TrueFeedback verification code",
-      text: `Your verification code is ${verificationCode}`
+      text: `Your verification code is ${verificationCode}`,
     };
 
-    transporter.sendMail(mailOptions, (err, info) => {
-      if (err) {
-        console.log("error sending email", err);
-        return Response.json(
-          {
-            success: false,
-            message: "error sending email",
-          },
-          {
-            status: 400,
-          }
-        );
-      }
-    });
+    try {
+      await transporter.sendMail(mailOptions);
+      return new Response(
+        JSON.stringify({
+          success: true,
+          message: "user registered successfully, please check your email",
+        }),
+        {
+          status: 200,
+        }
+      );
+    } catch (err) {
+      console.log("error sending email", err);
+      return new Response(
+        JSON.stringify({
+          success: false,
+          message: "error sending email",
+        }),
+        {
+          status: 500,
+        }
+      );
+    }
 
-    return Response.json(
-      {
-        success: true,
-        message: "user registerd successfully, please check your email",
-      },
-      {
-        status: 200,
-      }
-    );
   } catch (error) {
     console.error("error registering user req", error);
     return Response.json(
