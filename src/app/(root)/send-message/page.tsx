@@ -9,6 +9,7 @@ import '@/app/css/common.css'
 function Page() {
     const [message, setMessage] = useState<string>('')
     const [url, setUrl] = useState<string>('')
+    const [loading, setLoading] = useState(false)
 
     async function handleSuggestMessages() {
         const res = await axios.post('/api/suggest-messages')
@@ -26,45 +27,55 @@ function Page() {
 
     async function handleSendMessage() {
         if (isValidURL(url) && message.length > 5) {
+            setLoading(true)
             const segments = url.split('/')
             const username = segments[segments.length - 1]
             console.log(username)
             const res = await axios.post<ApiResponse>('/api/send-message', { username: username, content: message })
             if (res.data.success) {
+                setLoading(false)
                 toast.success('message sent successfully', {
-                    duration: 3000
+                    duration: 1000
                 })
+            }
+            else if(!res.data.isAcceptingMessages){
+                setLoading(false)
+                toast((t) => (
+                    <span>
+                      {res.data.message}
+                    </span>
+                ));
             }
         } else if (!isValidURL(url)) {
             toast.error('please enter a valid url', {
-                duration: 3000
+                duration: 1000
             })
         }else{
             toast.error('message should be of at least 5 characters', {
-                duration: 3000
+                duration: 1000
             })
         }
     }
 
     return (
         <>
-            <div data-theme="cupcake" className="send w-full p-12 h-[90vh] flex flex-col items-center">
-                <div className=' w-[90%] bg-neutral-200 p-12 rounded-xl'>
-                <div className="heading text-center pb-12 text-4xl">Send Anonymous Messages</div>
-                <div className='w-[70%]text-xl flex items-center' >
-                    <div className='w-[10vw]' >Enter unique link</div>
+            <div data-theme="cupcake" className="send w-full p-7 md:p-12 h-[90vh] flex flex-col items-center">
+                <div className=' w-[100%] bg-neutral-200 p-5 md:p-12 rounded-xl'>
+                <div className="heading text-center pb-12 text-2xl md:text-4xl">Send Anonymous Messages</div>
+                <div className='md:w-[70%]text-xl flex flex-col md:flex-row md:items-center' >
+                    <div className='md:w-[10vw] ' >Enter unique link</div>
                     <input data-theme="cupcake" type='text'
-                        className='border-b-2 m-5 px-2 bg-neutral-200 border-black'
+                        className='border-b-2 md:m-5 ml-1 mt-2 px-2 bg-neutral-200 border-black'
                         onChange={(e) => {
                             e.preventDefault()
                             setUrl(e.target.value)
                         }}
                         value={url} />
                 </div>
-                <div className='w-[70%]text-xl flex items-center'>
-                    <div className='w-[10vw]' >Enter your message</div>
+                <div className='md:w-[70%]text-xl mt-5 flex flex-col md:flex-row md:items-center'>
+                    <div className='md:w-[10vw] ' >Enter your message</div>
                     <input data-theme="cupcake" type="text"
-                        className='border-b-2 m-5 px-2 bg-neutral-200 border-black'
+                        className='border-b-2 md:m-5 ml-1 mt-2 px-2 bg-neutral-200 border-black'
                         onChange={(e) => {
                             e.preventDefault()
                             setMessage(e.target.value)
@@ -73,13 +84,13 @@ function Page() {
                         minLength={5}
                     />
                 </div>
-                <div className='my-5 send-bottom flex ' >
-                    <div className='w-[50%]'>
-                    <button onClick={handleSendMessage} className='px-10 py-3 bg-black text-white rounded-2xl ' >send Message</button>
+                <div className='my-10 send-bottom flex justify-center' >
+                    <div className=''>
+                    <button disabled={loading} onClick={handleSendMessage} className='px-10 py-3 bg-black text-white rounded-2xl ' >send Message</button>
                     </div>
-                    <div className='w-[50%]'>
+                    {/* <div className='w-[50%]'>
                     <button className='px-10 py-3 bg-black text-white rounded-2xl ' onClick={handleSuggestMessages} >suggest Messages</button>
-                    </div>
+                    </div> */}
                 </div>
                 </div>
             </div>

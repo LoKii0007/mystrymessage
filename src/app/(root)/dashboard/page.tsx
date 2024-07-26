@@ -8,6 +8,7 @@ import { ApiResponse } from '@/types/apiResponse';
 import toast from 'react-hot-toast';
 import '@/app/css/common.css'
 import { useRouter } from 'next/navigation';
+import { Switch } from '@/components/ui/switch';
 
 interface Message {
   content: string;
@@ -90,7 +91,7 @@ function Page() {
   return (
     <div data-theme="cupcake" className='main w-[100vw] flex justify-center '>
       <div className="dashboard  w-[90vw] h-[90vh] flex flex-col justify-start items-start">
-        <div className="dashoboard-top shadow-lg w-full bg-neutral-200 p-12 rounded-xl my-5">
+        <div className="dashoboard-top shadow-lg w-full bg-neutral-200 p-5 md:p-12 rounded-xl my-5">
           {/* <div className='text-5xl mb-4'>User dashboard</div> */}
           <div className='text-2xl my-4'>Copy your unique link</div>
           <div className='flex justify-between items-center pl-2 rounded-md bg-neutral-300 w-[100%]'>
@@ -99,17 +100,16 @@ function Page() {
           </div>
           <div className="accept flex my-4 w-[100%] justify-between items-center">
             <div className="accept-left flex items-center">
-              <input type="checkbox" className="toggle" disabled={loading} onClick={() => handleAcceptingMessage(!acceptingMessages)} checked={acceptingMessages} />
-              {/* <input className="accept-switch" onClick={(e)=>handleIsAccepting(e)} checked={acceptingMessages} type="checkbox" role="switch" /> */}
+              <Switch className='!bg-gray-500' disabled={loading} onClick={() => handleAcceptingMessage(!acceptingMessages)} checked={acceptingMessages} />
+              {/* <input type="checkbox" className="toggle" disabled={loading} onClick={() => handleAcceptingMessage(!acceptingMessages)} checked={acceptingMessages} /> */}
               <label className="px-3" htmlFor="accept-switch">Accepting messages : {acceptingMessages ? 'on' : 'off'}</label>
             </div>
-            {/* <button onClick={()=>router.push('/send-message')} className="send-btn px-10 py-3 bg-black text-white rounded-2xl ">Send message</button> */}
             <div className="accept-right">
               <button onClick={() => handleRefresh()} className=' rounded-md copy-btn'>Refresh</button>
             </div>
           </div>
         </div>
-        <div className="dashbord-body shadow-lg w-full bg-neutral-200 p-12 rounded-xl">
+        <div className="dashbord-body p-5 shadow-lg w-full bg-neutral-200 md:p-12 rounded-xl">
           <div className="heading text-2xl font-medium flex">
             <div className='mr-5' >Messages</div>
           </div>

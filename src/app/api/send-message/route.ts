@@ -13,7 +13,7 @@ export async function POST(req:Request) {
             return Response.json(
                 {
                   success: false,
-                  message: "user not found",
+                  message: "user not found"
                 },
                 {
                   status: 404,
@@ -25,9 +25,10 @@ export async function POST(req:Request) {
                 {
                   success: false,
                   message: "user is not accepting any messages",
+                  isAcceptingMessages : false
                 },
                 {
-                  status: 400,
+                  status: 200,
                 }
             );
         }
@@ -44,6 +45,7 @@ export async function POST(req:Request) {
             {
               success: true,
               messages : "message sent successfully",
+              isAcceptingMessages : true
             },
             {
               status: 200,
