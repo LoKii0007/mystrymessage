@@ -35,13 +35,13 @@ export default function Verify() {
 
     return (
         <>
-            <div className="verify-code h-[100vh] w-[100vw] flex justify-center items-center" >
-                <form onSubmit={(e) => handleSubmit(e)} className="" >
+            <div className="verify-code h-[100vh] w-[100vw] bg-neutral-200 flex justify-center items-center" >
+                <form onSubmit={(e) => handleSubmit(e)} className="bg-neutral-300 p-12 rounded-xl" >
                     <div className='password py-2 pb-5 flex flex-col' >
-                        <label htmlFor="string">Code</label>
-                        <input onChange={(e)=>setOtp(e.target.value)} className='border-2' name='otp' type="string" />
+                        <label className="text-center text-2xl my-5" htmlFor="string">Enter OTP</label>
+                        <input onChange={(e)=>setOtp(e.target.value)} className='border-2 p-2 rounded-full' name='otp' type="string" />
                     </div>
-                    <div className="text-center">
+                    <div className="text-center mt-1">
                         <button
                             type="submit"
                             disabled={isVerifying}
