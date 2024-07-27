@@ -86,7 +86,7 @@ function Page() {
                 </div>
                 <div className='my-10 send-bottom flex justify-center' >
                     <div className=''>
-                    <button disabled={loading} onClick={handleSendMessage} className='px-10 py-3 bg-black text-white rounded-2xl ' >send Message</button>
+                    <button disabled={loading} onClick={handleSendMessage} className='px-10 py-3 bg-black text-white rounded-2xl ' >{loading ? 'sending ...':'send Message'}</button>
                     </div>
                     {/* <div className='w-[50%]'>
                     <button className='px-10 py-3 bg-black text-white rounded-2xl ' onClick={handleSuggestMessages} >suggest Messages</button>
