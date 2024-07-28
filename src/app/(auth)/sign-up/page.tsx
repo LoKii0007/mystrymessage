@@ -6,6 +6,7 @@ import axios, { AxiosError } from "axios"
 import { ApiResponse } from "@/types/apiResponse"
 import '@/app/css/signup.css'
 import toast from "react-hot-toast"
+import { useToast } from "@/components/ui/use-toast"
 
 function Signup() {
   const router = useRouter()
@@ -19,6 +20,8 @@ function Signup() {
     username: username,
     password: ''
   })
+  const {toast : shadToast} = useToast()
+
 
   const delay = 1000
 
@@ -74,12 +77,20 @@ function Signup() {
       if (res.data.success) {
         // toast
         console.log('res :', res.data)
-        toast.success('otp sent please check your mail')
+        // toast.success('otp sent please check your mail')
+        shadToast({
+          title: "OTP Sent",
+          description: `Please check your mail for otp`,
+        });
         router.replace(`/verify-code/${data.username}`)
 
       } else {
         // toast
         console.log('res :', res.data)
+        shadToast({
+          title: "Error sending otp",
+          description: `some error occured please try again`,
+        });
       }
     } catch (error) {
       console.log('error calling sign-up api', error)

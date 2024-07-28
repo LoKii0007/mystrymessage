@@ -59,7 +59,7 @@ export async function POST(req:Request) {
               message: "error sednding messages",
             },
             {
-              status: 500,
+              status: 500
             }
         );
     }

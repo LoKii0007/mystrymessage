@@ -4,12 +4,15 @@ import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
+import { useToast } from "@/components/ui/use-toast"
 
 export default function Signin() {
     const [text, setText] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
     const router = useRouter()
+  const {toast : shadToast} = useToast()
+
 
     async function handleSubmit() {
         setLoading(true)
@@ -20,9 +23,17 @@ export default function Signin() {
         })
         if (res?.status === 200) {
             toast.success(`logged in as ${text}`)
+            shadToast({
+                title: "loggen In",
+                description: `logged in as ${text}`,
+              });
             router.push('/dashboard')
         } else {
-            toast.error(`some error occured please try again`)
+            // toast.error(`some error occured please try again`)
+            shadToast({
+                title: "Error Logging In",
+                description: `some error occured please try again`,
+              });
         }
         setLoading(false)
         // console.log('signin res :' , res)

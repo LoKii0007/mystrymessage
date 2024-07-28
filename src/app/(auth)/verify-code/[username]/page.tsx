@@ -4,6 +4,7 @@ import axios from "axios"
 import { useParams, useRouter } from "next/navigation"
 import { useState } from "react"
 import toast from "react-hot-toast"
+import { useToast } from "@/components/ui/use-toast"
 
 export default function Verify() {
 
@@ -11,6 +12,8 @@ export default function Verify() {
     const params = useParams<{username : string}>()
     const [otp, setOtp] = useState('')
     const router = useRouter()
+  const {toast : shadToast} = useToast()
+
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -21,9 +24,17 @@ export default function Verify() {
             console.log(res.data)
             if(res.data.success){
                 toast.success('verified successfully , please login')
+                shadToast({
+                    title: "OTP Verification successfull",
+                    description: `Please Login with your credentials`,
+                  });
                 router.push('/sign-in')
             }else{
                 toast.success(`${res.data.message}`)
+                shadToast({
+                    title: "Error",
+                    description: `${res.data.message}`,
+                  });
                 console.log(res.data.message)
             }
         } catch (error) {

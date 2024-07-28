@@ -5,10 +5,12 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
 import { ApiResponse } from '@/types/apiResponse';
-import toast from 'react-hot-toast';
 import '@/app/css/common.css'
 import { useRouter } from 'next/navigation';
 import { Switch } from '@/components/ui/switch';
+import { useToast } from "@/components/ui/use-toast"
+import toast from 'react-hot-toast';
+
 
 interface Message {
   content: string;
@@ -17,6 +19,7 @@ interface Message {
 }
 
 function Page() {
+  const {toast : shadToast} = useToast()
   const [messages, setMessages] = useState<Message[]>([])
   const router = useRouter()
   const [loading, setLoading] = useState<true | false>(false)
@@ -36,11 +39,23 @@ function Page() {
   function copyToClipboard() {
     if (navigator.clipboard) {
       navigator.clipboard.writeText(uniqueUrl).then(() => {
-        toast.success('copied to clipboard')
+        shadToast({
+          title: "Copied to Clipboard",
+          description: "The URL has been copied successfully!",
+        });
       }).catch(err => {
-        toast.error('Failed to copy text')
+        shadToast({
+          title: "Copy Failed",
+          description: "Failed to copy the URL to clipboard.",
+        });
+      });
+    } else {
+      shadToast({
+        title: "Clipboard Access Denied",
+        description: "Clipboard API is not supported in this browser.",
       });
     }
+
   }
 
   async function handleAcceptingMessage(msg: boolean | undefined) {
@@ -67,9 +82,17 @@ function Page() {
     console.log(res)
     if (res.data.success) {
       setMessages(messages.filter(msg => msg._id !== messageId));
-      toast.success('Message deleted successfully');
+      // toast.success('Message deleted successfully');
+      shadToast({
+        title: "Deleted",
+        description: "Message deleted successfully",
+      });
     } else {
-      toast.error('Failed to delete message');
+      // toast.error('Failed to delete message');
+      shadToast({
+        title: "Error",
+        description: "Error deleting message",
+      });
     }
   }
 
