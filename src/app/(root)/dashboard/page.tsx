@@ -37,10 +37,8 @@ function Page() {
     if (navigator.clipboard) {
       navigator.clipboard.writeText(uniqueUrl).then(() => {
         toast.success('copied to clipboard')
-        // console.log('Text copied to clipboard', uniqueUrl);
       }).catch(err => {
         toast.error('Failed to copy text')
-        // console.error('Failed to copy text: ', err);
       });
     }
   }
@@ -96,7 +94,7 @@ function Page() {
           <div className='text-2xl my-4'>Copy your unique link</div>
           <div className='flex justify-between items-center pl-2 rounded-md bg-neutral-300 w-[100%]'>
             <div className='link' >{uniqueUrl}</div>
-            <button onClick={()=>copyToClipboard} className='copy-btn rounded-md'>copy</button>
+            <button onClick={()=>copyToClipboard()} className='copy-btn rounded-md'>copy</button>
           </div>
           <div className="accept flex my-4 w-[100%] justify-between items-center">
             <div className="accept-left flex items-center">
